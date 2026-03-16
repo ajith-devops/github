@@ -5,20 +5,19 @@ pipeline {
 
         stage('Clone') {
             steps {
-                echo 'Cloning repository...'
+                echo 'Cloning repository'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building application...'
-                sh 'ls'
+                sh 'docker build -t devops-demo .'
             }
         }
 
-        stage('Test') {
+        stage('Run Container') {
             steps {
-                echo 'Testing application...'
+                sh 'docker run -d -p 3000:3000 devops-demo'
             }
         }
 
