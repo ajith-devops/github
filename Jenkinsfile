@@ -3,21 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Cloning repository'
+                sh 'docker build -t ajithkumar14542/devops-demo .'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Push Docker Image') {
             steps {
-                sh 'docker build -t devops-demo .'
+                sh 'docker push ajithkumar14542/devops-demo'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 3000:3000 devops-demo'
+                sh 'docker run -d -p 3000:3000 ajithkumar14542/devops-demo'
             }
         }
 
